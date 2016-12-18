@@ -17,9 +17,6 @@ app.get('/', function (req, res) {
     // process.env.PORT lets the port be set by Heroku
     var port = process.env.PORT || 8080;
 
-    // set the view engine to ejs
-    app.set('view engine', 'ejs');
-
     // connect to your database
     sql.connect(config, function (err) {
 

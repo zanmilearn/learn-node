@@ -1,2 +1,2 @@
-# learn-node
-backend of learning application
+# zanmilearnnode
+backend source code for zanmi learn application

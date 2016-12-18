@@ -1,21 +1,21 @@
 var express = require('express');
 var app = express();
 
+
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
+
+var sql = require("mssql");
+
+var config = {
+    user: 'Zanmi',
+    password: 'zanmi@123',
+    server: '184.168.194.68',
+    database: 'ZanmiLearn'
+};
+
 app.get('/', function (req, res) {
-
-    var sql = require("mssql");
-
-    // config for your database
-    var config = {
-        user: 'Zanmi',
-        password: 'zanmi@123',
-        server: '184.168.194.68',
-        database: 'ZanmiLearn'
-    };
-
-    // set the port of our application
-    // process.env.PORT lets the port be set by Heroku
-    var port = process.env.PORT || 8080;
 
     // connect to your database
     sql.connect(config, function (err) {

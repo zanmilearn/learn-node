@@ -1,2 +1,1 @@
-# zanmilearnnode
-backend source code for zanmi learn application
+# Skeleton project for Swagger

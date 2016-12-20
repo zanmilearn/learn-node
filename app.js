@@ -1,7 +1,8 @@
 'use strict';
 
 var SwaggerExpress = require('swagger-express-mw');
-var app = require('express')();
+var express=require('express');
+var app= express();
 var mongoose=require('mongoose');
 var swaggerjson=require('./api/swagger/swagger.json');
 
@@ -19,6 +20,8 @@ app.use(function(req, res, next) {
   });
   next();
 });
+
+app.use(express.static('./public'));
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }

@@ -1,4 +1,4 @@
-# Backend api code for Zanmi Learning app.
+# Zanmi Learning app - Backend
 
 ## Technologies Used
 -  Swagger

@@ -1,9 +1,22 @@
 swagger: '2.0'
 info:
-    version: 0.0.1
-    title: Hello World App
+    description: This is a server hosting all apis for Zanmi Learning app
+    version: 1.0.0
+    title: Zanmi Learning API Store
+    contact:
+        email: zanmilearning@gmail.com
+    license:
+        name: Apache 2.0
+        url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 host: 'localhost:10010'
-basePath: /
+basePath: /v2
+tags:
+    - 
+        name: Courses
+        description: Course Apis
+    - 
+        name: Topics
+        description: Topics Apis
 schemes:
     - http
     - https
@@ -12,31 +25,12 @@ consumes:
 produces:
     - application/json
 paths:
-    /hello:
-        x-swagger-router-controller: hello_world
-        get:
-            description: "Returns 'Hello' to the caller"
-            operationId: hello
-            parameters:
-                - 
-                    name: name
-                    in: query
-                    description: The name of the person to whom to say hello
-                    required: false
-                    type: string
-            responses:
-                '200':
-                    description: Success
-                    schema:
-                        $ref: '#/definitions/HelloWorldResponse'
-                default:
-                    description: Error
-                    schema:
-                        $ref: '#/definitions/ErrorResponse'
     /courses:
         x-swagger-router-controller: courses
         get:
-            description: "Returns 'Hello' to the caller"
+            tags:
+                - courses
+            description: Get all Courses
             operationId: getAllCourses
             responses:
                 '200':
@@ -48,13 +42,15 @@ paths:
                     schema:
                         $ref: '#/definitions/ErrorResponse'
         post:
-            description: "Returns 'Hello' to the caller"
+            tags:
+                - courses
+            description: Create a new Course
             operationId: createCourse
             parameters:
                 - 
                     name: course
                     in: body
-                    description: course
+                    description: course object
                     schema:
                         $ref: '#/definitions/getAllCoursesResponse'
             responses:

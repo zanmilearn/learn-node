@@ -12,7 +12,7 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "zanmilearn.herokuapp.com",
+    "host": "localhost:10010",
     "basePath": "/v2",
     "tags": [
         {

@@ -12,7 +12,7 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "zanmilearn.herokuapp.com",
+    "host": "localhost:10100",    
     "basePath": "/v2",
     "tags": [
         {
@@ -20,8 +20,8 @@
             "description": "Course Apis"
         },
         {
-            "name": "Topics",
-            "description": "Topics Apis"
+            "name": "Users",
+            "description": "User Apis for login & register"
         }
     ],
     "schemes": [
@@ -38,8 +38,8 @@
         "/courses": {
             "x-swagger-router-controller": "courses",
             "get": {
-                "tags":[
-                    "courses"
+                "tags": [
+                    "Courses"
                 ],
                 "description": "Get all Courses",
                 "operationId": "getAllCourses",
@@ -59,8 +59,8 @@
                 }
             },
             "post": {
-                "tags":[
-                    "courses"
+                "tags": [
+                    "Courses"
                 ],
                 "description": "Create a new Course",
                 "operationId": "createCourse",
@@ -79,6 +79,61 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/getAllCoursesResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "x-swagger-router-controller": "users",
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "Get all Users",
+                "operationId": "getAllUsers",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/getAllUsersResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "Create a new user/register",
+                "operationId": "createUser",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "in": "body",
+                        "description": "user object",
+                        "schema": {
+                            "$ref": "#/definitions/getAllUsersResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/getAllUsersResponse"
                         }
                     },
                     "default": {
@@ -118,6 +173,49 @@
                     "type": "string"
                 },
                 "courseType": {
+                    "type": "string"
+                }
+            }
+        },
+        "getAllUsersResponse": {
+            "required": [
+                "username",
+                "password",
+                "email"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "verified": {
+                    "type": "boolean"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "usernameParamResponse": {
+            "required": [
+                "username"
+            ],
+            "properties": {
+                "username": {
                     "type": "string"
                 }
             }

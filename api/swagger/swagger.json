@@ -12,7 +12,7 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "localhost:10100",
+    "host": "zanmilearn.herokuapp.com",
     "basePath": "/v2",
     "tags": [
         {
@@ -32,7 +32,8 @@
         "application/json"
     ],
     "produces": [
-        "application/json"
+        "application/json",
+        "text/plain"
     ],
     "paths": {
         "/courses": {
@@ -172,6 +173,14 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/getAllUsersResponse"
+                        }
+                    },
+                    "302": {
+                        "description": "302 response",
+                        "headers": {
+                            "Location": {
+                                "type": "string"
+                            }
                         }
                     },
                     "default": {

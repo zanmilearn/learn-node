@@ -11,8 +11,6 @@ var smtpConfig = {
 };
 
 
-
-
 var smtpTransport = nodemailer.createTransport(smtpConfig);
 
 

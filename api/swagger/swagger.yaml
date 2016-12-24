@@ -8,7 +8,7 @@ info:
     license:
         name: Apache 2.0
         url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-host: 'localhost:10100'
+host: zanmilearn.herokuapp.com
 basePath: /v2
 tags:
     - 
@@ -24,6 +24,7 @@ consumes:
     - application/json
 produces:
     - application/json
+    - text/plain
 paths:
     /courses:
         x-swagger-router-controller: courses
@@ -122,6 +123,11 @@ paths:
                     description: Success
                     schema:
                         $ref: '#/definitions/getAllUsersResponse'
+                '302':
+                    description: 302 response
+                    headers:
+                        Location:
+                            type: string
                 default:
                     description: Error
                     schema:

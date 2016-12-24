@@ -36,7 +36,7 @@ var sendMail = function (mailid,username,hash) {
     };
 
     var context={
-         extlink: 'http://localhost:10010/v2/users/validateemail?username='+username +'&hash='+hash
+         extlink: 'http://zanmilearn.herokuapp.com/v2/users/validateemail?username='+username +'&hash='+hash
     }
 
     mailutil.sendmail(mailOptions,templateobj,context, function (error, info) {

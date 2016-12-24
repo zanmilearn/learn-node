@@ -68,14 +68,18 @@ exports.validateEmail = function (req, res) {
     var _username = req.swagger.params.username.value;
     var _hash = req.swagger.params.hash.value;
 
-    User.findOneAndUpdate({ username: _username, hash: _hash }, { verified: true },{new: true}, function (err, user) {
+    User.findOneAndUpdate({ username: _username, hash: _hash }, { verified: true }, { new: true }, function (err, user) {
         if (err) {
             return res.status(400).send({
                 message: "error"
             });
         } else {
-            if (user)
-                res.json(user);
+            if (user) {
+                res.writeHead(302,
+                    { Location: 'http://learn.phoenixaviationmarine.com' }
+                );
+                res.end();
+            }
             else {
                 return res.status(404).send({
                     message: "not found"

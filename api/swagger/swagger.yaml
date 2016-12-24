@@ -16,7 +16,7 @@ tags:
         description: Course Apis
     - 
         name: Users
-        description: 'User Apis for login & register'
+        description: User Apis
 schemes:
     - http
     - https
@@ -119,12 +119,8 @@ paths:
                     description: hash
                     type: string
             responses:
-                '200':
-                    description: Success
-                    schema:
-                        $ref: '#/definitions/getAllUsersResponse'
                 '302':
-                    description: 302 response
+                    description: redirect after successfull verification
                     headers:
                         Location:
                             type: string

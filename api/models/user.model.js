@@ -15,7 +15,7 @@ var mailtemplate = fs.readFileSync('./mailtemplate.html');
 
 
 
-var sendMail = function (mailid,username,hash) {
+var sendMail = function (mailid, username, hash) {
 
     var tomailid;
 
@@ -35,11 +35,11 @@ var sendMail = function (mailid,username,hash) {
         html: mailtemplate
     };
 
-    var context={
-         extlink: 'http://zanmilearn.herokuapp.com/v2/users/validateemail?username='+username +'&hash='+hash
+    var context = {
+        extlink: 'http://zanmilearn.herokuapp.com/v2/users/validateemail?username=' + username + '&hash=' + hash
     }
 
-    mailutil.sendmail(mailOptions,templateobj,context, function (error, info) {
+    mailutil.sendmail(mailOptions, templateobj, context, function (error, info) {
         if (error) {
             return console.log(error);
         }
@@ -88,9 +88,10 @@ userSchema.pre('save', function (next) {
     this.updated_at = now.toString();
     if (!this.created_at) {
         this.created_at = now.toString();
+        this.hash = common.genRandomString(this.username);
+        sendMail(this.email, this.username, this.hash);
     }
-    this.hash = common.genRandomString(8);
-    sendMail(this.email,this.username,this.hash);
+
     next();
 });
 

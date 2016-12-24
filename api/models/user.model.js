@@ -6,44 +6,40 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var fs=require('fs');
+var mailutil = require('./../../util/mail');
 
-var nodemailer = require('nodemailer');
+var common = require('./../../util/common');
 
-var mailtemplate=null;
-mailtemplate=fs.readFileSync('./mailtemplate.html');
+var fs = require('fs');
+var mailtemplate = fs.readFileSync('./mailtemplate.html');
 
-var smtpConfig = {
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // use SSL
-    auth: {
-        user: "zanmilearning@gmail.com",
-        pass: "zanmi@123"
+
+
+var sendMail = function (mailid,username,hash) {
+
+    var tomailid;
+
+    if (mailid)
+        tomailid = mailid;
+    else
+        tomailid = 'raj.nagaraj1990@gmail.com';
+
+    var mailOptions = {
+        from: '"Zanmi Learn ✉" <zanmilearning@gmail.com>', // sender address
+        to: mailid,// list of receivers
+    };
+
+    var templateobj = {
+        subject: 'Activate your account ✔',
+        text: '',
+        html: mailtemplate
+    };
+
+    var context={
+         extlink: 'http://localhost:10010/v2/users/validateemail?username='+username +'&hash='+hash
     }
-};
 
-//var smtpConfig = 'smtps://zanmilearning%40gmail.com:zanmi%40123@smtp.gmail.com';
-
-var smtpTransport = nodemailer.createTransport(smtpConfig);
-
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Zanmi Learn ✉" <zanmilearning@gmail.com>', // sender address
-    to: "raj.nagaraj1990@gmail.com",// list of receivers
-    subject: 'Activate your account ✔', // Subject line
-    text: '', // plaintext body
-    html: mailtemplate,
-     // html body
-};
-
-var sendMail = function (mailid) {
-
-    // send mail with defined transport object
-    if(mailid)
-    mailOptions.to=mailid;
-
-    smtpTransport.sendMail(mailOptions, function (error, info) {
+    mailutil.sendmail(mailOptions,templateobj,context, function (error, info) {
         if (error) {
             return console.log(error);
         }
@@ -80,6 +76,9 @@ var userSchema = new Schema({
         type: Boolean,
         default: false
     },
+    hash: {
+        type: String
+    },
     created_at: String,
     updated_at: String
 });
@@ -90,7 +89,8 @@ userSchema.pre('save', function (next) {
     if (!this.created_at) {
         this.created_at = now.toString();
     }
-    sendMail(this.email);
+    this.hash = common.genRandomString(8);
+    sendMail(this.email,this.username,this.hash);
     next();
 });
 

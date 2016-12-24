@@ -12,7 +12,7 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "localhost:10100",    
+    "host": "localhost:10100",
     "basePath": "/v2",
     "tags": [
         {
@@ -127,6 +127,44 @@
                         "schema": {
                             "$ref": "#/definitions/getAllUsersResponse"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/getAllUsersResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/validateemail": {
+            "x-swagger-router-controller": "users",
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "validate email and redirect to app",
+                "operationId": "validateEmail",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "username",
+                        "type": "string"
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "hash",
+                        "type": "string"
                     }
                 ],
                 "responses": {

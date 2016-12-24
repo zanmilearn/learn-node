@@ -3,8 +3,8 @@
 /**
  * Module dependencies.
  */
- var mongoose = require('mongoose');
- var User = require('./../models/user.model');
+var mongoose = require('mongoose');
+var User = require('./../models/user.model');
 
 
 // get all the users
@@ -63,18 +63,28 @@ exports.updateUserByUserName = function (req, res) {
 
 }
 
-exports.updateUserByUserName = function (req, res) {
-    var params = req.swagger.params.payload.value;
-    User.findOneAndUpdate(params, function (err, user) {
+
+exports.validateEmail = function (req, res) {
+    var _username = req.swagger.params.username.value;
+    var _hash = req.swagger.params.hash.value;
+
+    User.findOneAndUpdate({ username: _username, hash: _hash }, { verified: true },{new: true}, function (err, user) {
         if (err) {
             return res.status(400).send({
                 message: "error"
             });
         } else {
-            res.json(user);
-        }
-    });
+            if (user)
+                res.json(user);
+            else {
+                return res.status(404).send({
+                    message: "not found"
+                });
+            }
 
+        }
+
+    });
 }
 
 

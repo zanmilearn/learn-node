@@ -22,14 +22,14 @@ exports.getAllUsers = function (req, res) {
 
 // get user by username
 exports.getUserByUserName = function (req, res) {
-    var params = req.swagger.params.payload.value;
-    User.find(params, function (err, users) {
+    var _username = req.swagger.params.username.value;
+    User.find({ username: _username}, function (err, user) {
         if (err) {
             return res.status(400).send({
                 message: "error"
             });
         } else {
-            res.json(users);
+            res.json(user);
         }
     });
 }

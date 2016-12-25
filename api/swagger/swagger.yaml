@@ -9,7 +9,7 @@ info:
         name: Apache 2.0
         url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 host: zanmilearn.herokuapp.com
-basePath: /v2
+basePath: /api/v2
 tags:
     - 
         name: Courses
@@ -124,6 +124,29 @@ paths:
                     headers:
                         Location:
                             type: string
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+    '/users/getUserByUserName/{username}':
+        x-swagger-router-controller: users
+        get:
+            tags:
+                - Users
+            description: get user by user name
+            operationId: getUserByUserName
+            parameters:
+                - 
+                    name: username
+                    in: path
+                    description: username
+                    type: string
+                    required: true
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/getAllUsersResponse'
                 default:
                     description: Error
                     schema:

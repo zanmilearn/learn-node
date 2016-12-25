@@ -76,7 +76,7 @@ exports.validateEmail = function (req, res) {
         } else {
             if (user) {
                 res.writeHead(302,
-                    { Location: 'http://learn.phoenixaviationmarine.com' }
+                    { Location: 'http://learn.phoenixaviationmarine.com/#/verified' }
                 );
                 res.end();
             }

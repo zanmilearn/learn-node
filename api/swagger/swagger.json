@@ -71,7 +71,7 @@
                         "in": "body",
                         "description": "course object",
                         "schema": {
-                            "$ref": "#/definitions/getAllCoursesResponse"
+                            "$ref": "#/definitions/inBody"
                         }
                     }
                 ],
@@ -79,7 +79,7 @@
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/getAllCoursesResponse"
+                            "$ref": "#/definitions/inBody"
                         }
                     },
                     "default": {
@@ -200,7 +200,7 @@
                         "in": "path",
                         "description": "username",
                         "type": "string",
-                        "required":true
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -293,6 +293,9 @@
                     "type": "string"
                 }
             }
+        },
+        "inBody": {
+            "type": "object"
         },
         "ErrorResponse": {
             "required": [

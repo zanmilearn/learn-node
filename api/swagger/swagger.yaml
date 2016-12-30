@@ -53,12 +53,12 @@ paths:
                     in: body
                     description: course object
                     schema:
-                        $ref: '#/definitions/getAllCoursesResponse'
+                        $ref: '#/definitions/inBody'
             responses:
                 '200':
                     description: Success
                     schema:
-                        $ref: '#/definitions/getAllCoursesResponse'
+                        $ref: '#/definitions/inBody'
                 default:
                     description: Error
                     schema:
@@ -199,6 +199,8 @@ definitions:
         properties:
             username:
                 type: string
+    inBody:
+        type: object
     ErrorResponse:
         required:
             - message

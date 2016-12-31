@@ -8,27 +8,21 @@ var Course = require('./../models/course.model');
 var fs = require('fs');
 
 
-// exports.createCourse = function (req, res) {
-//     console.log(req.swagger.params.course.value);
-//     var course = new Course(req.swagger.params.course.value);
-
-//     course.save(function (err) {
-//         if (err) {
-//             return res.status(400).send({
-//                 message: err
-//             });
-//         } else {
-//             res.json(course);
-//         }
-//     });
-// };
-
 exports.createCourse = function (req, res) {
     console.log(req.swagger.params.course.value);
-    fs.writeFile('test.json', JSON.stringify(req.swagger.params.course.value, null, 4));
-    res.json(req.swagger.params.course.value);
+    var course = new Course(req.swagger.params.course.value);
 
+    course.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: err
+            });
+        } else {
+            res.json(course);
+        }
+    });
 };
+
 
 exports.getAllCourses = function (req, res) {
 

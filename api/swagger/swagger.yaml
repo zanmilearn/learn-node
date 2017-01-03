@@ -15,6 +15,12 @@ tags:
         name: Courses
         description: Course Apis
     - 
+        name: Topics
+        description: Topic Apis
+    - 
+        name: Contents
+        description: Content Apis
+    - 
         name: Users
         description: User Apis
 schemes:
@@ -49,7 +55,7 @@ paths:
             operationId: createCourse
             parameters:
                 - 
-                    name: course
+                    name: payload
                     in: body
                     description: course object
                     schema:
@@ -58,7 +64,144 @@ paths:
                 '200':
                     description: Success
                     schema:
+                        $ref: '#/definitions/getAllCoursesResponse'
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+        delete:
+            tags:
+                - Courses
+            description: Delete a  Course
+            operationId: deleteCourse
+            parameters:
+                - 
+                    name: payload
+                    in: body
+                    description: course object
+                    schema:
                         $ref: '#/definitions/inBody'
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/getAllCoursesResponse'
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+    /topics:
+        x-swagger-router-controller: topics
+        get:
+            tags:
+                - Topics
+            description: Get all Topic
+            operationId: getAllTopics
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/getAllTopicsResponse'
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+        post:
+            tags:
+                - Topics
+            description: Create a new Topic
+            operationId: createTopic
+            parameters:
+                - 
+                    name: payload
+                    in: body
+                    description: topic object
+                    schema:
+                        $ref: '#/definitions/inBody'
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+        delete:
+            tags:
+                - Courses
+            description: Delete a  Course
+            operationId: deleteTopic
+            parameters:
+                - 
+                    name: payload
+                    in: body
+                    description: topic object
+                    schema:
+                        $ref: '#/definitions/inBody'
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/getAllTopicsResponse'
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+    /contents:
+        x-swagger-router-controller: contents
+        get:
+            tags:
+                - Contents
+            description: Get all Contents
+            operationId: getAllContents
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/getAllContentsResponse'
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+        post:
+            tags:
+                - Contents
+            description: Create a new Content
+            operationId: createContent
+            parameters:
+                - 
+                    name: payload
+                    in: body
+                    description: content object
+                    schema:
+                        $ref: '#/definitions/inBody'
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/inBody'
+                default:
+                    description: Error
+                    schema:
+                        $ref: '#/definitions/ErrorResponse'
+        delete:
+            tags:
+                - Contents
+            description: Delete a  Content
+            operationId: deleteContent
+            parameters:
+                - 
+                    name: payload
+                    in: body
+                    description: content object
+                    schema:
+                        $ref: '#/definitions/inBody'
+            responses:
+                '200':
+                    description: Success
+                    schema:
+                        $ref: '#/definitions/getAllContentsResponse'
                 default:
                     description: Error
                     schema:
@@ -164,6 +307,7 @@ definitions:
         required:
             - courseName
             - courseDesc
+            - courseNodeId
         properties:
             courseName:
                 type: string
@@ -171,6 +315,42 @@ definitions:
                 type: string
             courseType:
                 type: string
+            courseNodeId:
+                type: number
+            topics:
+                type: array
+                items:
+                    type: string
+    getAllTopicsResponse:
+        required:
+            - topicName
+            - topicDesc
+            - topicNodeId
+        properties:
+            topicName:
+                type: string
+            topicDesc:
+                type: string
+            topicNodeId:
+                type: number
+            parentNodeId:
+                type: number
+            contents:
+                type: array
+                items:
+                    type: object
+    getAllContentsResponse:
+        required:
+            - contentName
+            - contentDesc
+            - contentNodeId
+        properties:
+            contentName:
+                type: string
+            contentDesc:
+                type: string
+            contentNodeId:
+                type: number
     getAllUsersResponse:
         required:
             - username

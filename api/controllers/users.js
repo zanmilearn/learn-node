@@ -46,7 +46,7 @@ exports.createUser = function (req, res) {
             res.json(user);
         }
     });
-};
+}
 
 
 exports.updateUserByUserName = function (req, res) {
@@ -89,7 +89,7 @@ exports.validateEmail = function (req, res) {
         }
 
     });
-}
+};
 
 
 

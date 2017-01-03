@@ -20,14 +20,28 @@ var CourseSchema = new Schema({
     type: String,
     default: '',
     trim: true,
-    required:'CourseDesc cannot be blank'
+    required: 'CourseDesc cannot be blank'
   },
-  courseType:{
-    type:String,
-    default:'C',
-    trim:true
-  }
+  courseType: {
+    type: String,
+    default: 'C',
+    trim: true
+  },
+  courseNodeId: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  topics: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Topic'
+    }
+  ]
+
 });
 
-var coursemodel=mongoose.model('Course', CourseSchema);
-module.exports=coursemodel;
+
+var coursemodel = mongoose.model('Course', CourseSchema);
+
+module.exports = coursemodel;

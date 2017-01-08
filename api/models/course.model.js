@@ -32,6 +32,9 @@ var CourseSchema = new Schema({
     required: true,
     unique: true
   },
+  courseFont:{
+    type: String
+  },
   topics: [
     {
       type: Schema.Types.ObjectId,

@@ -27,6 +27,9 @@ var TopicSchema = new Schema({
     required: true,
     unique: true
   },
+  topicFont:{
+    type: String
+  },
   contents: [
     {
       type: Schema.Types.ObjectId,

@@ -30,7 +30,7 @@ exports.createTopic = function (req, res) {
             if(_selcontent)
             _topic.contents.push(_selcontent._id);
 
-            if (idx === array.length - 1) {
+            if (_topics.contents.length === array.length) {
                 Topic.findOneAndUpdate({ topicNodeId: _topic.topicNodeId }, _topic, { upsert: true, new: true }, function (err, savedtopic) {
                     if (err) {
                         return res.status(400).send({

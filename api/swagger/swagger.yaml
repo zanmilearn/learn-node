@@ -317,6 +317,8 @@ definitions:
                 type: string
             courseNodeId:
                 type: number
+            courseFont:
+                type: string
             topics:
                 type: array
                 items:
@@ -333,12 +335,14 @@ definitions:
                 type: string
             topicNodeId:
                 type: number
-            parentNodeId:
-                type: number
+            topicFont:
+                type: string
             contents:
                 type: array
                 items:
                     type: object
+            parentNodeId:
+                type: number
     getAllContentsResponse:
         required:
             - contentName

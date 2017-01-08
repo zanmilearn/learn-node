@@ -29,7 +29,7 @@ exports.createCourse = function (req, res) {
             if (_seltopic)
                 _course.topics.push(_seltopic._id);
 
-            if (_course.topics.length === array.length) {
+            if (idx === array.length - 1) {
                 Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
                     if (err) {
                         return res.status(400).send({

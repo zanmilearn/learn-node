@@ -19,7 +19,7 @@
             "name": "Courses",
             "description": "Course Apis"
         },
-         {
+        {
             "name": "Topics",
             "description": "Topic Apis"
         },
@@ -130,7 +130,7 @@
                 }
             }
         },
-         "/topics": {
+        "/topics": {
             "x-swagger-router-controller": "topics",
             "get": {
                 "tags": [
@@ -216,7 +216,7 @@
                 }
             }
         },
-         "/contents": {
+        "/contents": {
             "x-swagger-router-controller": "contents",
             "get": {
                 "tags": [
@@ -461,13 +461,16 @@
                 "courseType": {
                     "type": "string"
                 },
-                "courseNodeId":{
-                    "type":"number"
+                "courseNodeId": {
+                    "type": "number"
                 },
-                "topics":{
-                    "type":"array",
-                    "items":{
-                        "type":"string"
+                "courseFont": {
+                    "type": "string"
+                },
+                "topics": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             }
@@ -488,15 +491,19 @@
                 "topicNodeId": {
                     "type": "number"
                 },
-                "parentNodeId":{
-                    "type": "number"
+                 "topicFont": {
+                    "type": "string"
                 },
-                "contents":{
-                    "type":"array",
-                    "items":{
-                        "type":"object"
+                "contents": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
                     }
+                },
+                "parentNodeId": {
+                    "type": "number"
                 }
+                
             }
         },
         "getAllContentsResponse": {

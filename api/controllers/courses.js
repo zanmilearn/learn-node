@@ -29,7 +29,7 @@ exports.createCourse = function (req, res) {
             if (_seltopic)
                 _course.topics.push(_seltopic._id);
 
-            while(_course.topics.length == _coursebase.topics.length) {
+            if (idx === array.length - 1) {
                 Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
                     if (err) {
                         return res.status(400).send({
@@ -71,7 +71,7 @@ exports.deleteCourse = function (req, res) {
 
 exports.getAllCourses = function (req, res) {
 
-
+    
 
     Course.find().populate('topics').exec(function (err, courses) {
         if (err) {

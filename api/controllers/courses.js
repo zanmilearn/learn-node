@@ -30,15 +30,18 @@ exports.createCourse = function (req, res) {
                 _course.topics.push(_seltopic._id);
 
             if (idx === array.length - 1) {
-                Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
-                    if (err) {
-                        return res.status(400).send({
-                            message: err
-                        });
-                    } else {
-                        res.json(course);
-                    }
+                setTimeout(2000, function () {
+                    Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
+                        if (err) {
+                            return res.status(400).send({
+                                message: err
+                            });
+                        } else {
+                            res.json(course);
+                        }
+                    });
                 });
+
             }
         });
     });
@@ -71,7 +74,7 @@ exports.deleteCourse = function (req, res) {
 
 exports.getAllCourses = function (req, res) {
 
-    
+
 
     Course.find().populate('topics').exec(function (err, courses) {
         if (err) {

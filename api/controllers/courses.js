@@ -42,17 +42,22 @@ exports.createCourse = function (req, res) {
                 }
             }
             else if (err) {
-                if (idx === array.length - 1) {
-                    Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
-                        if (err) {
-                            return res.status(400).send({
-                                message: err
-                            });
-                        } else {
-                            res.json(course);
-                        }
+                // if (idx === array.length - 1) {
+                //     Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
+                //         if (err) {
+                //             return res.status(400).send({
+                //                 message: err
+                //             });
+                //         } else {
+                //             res.json(course);
+                //         }
+                //     });
+                // }
+                
+                    return res.status(400).send({
+                        message: err
                     });
-                }
+                
             }
         });
     });

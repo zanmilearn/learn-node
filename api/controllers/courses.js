@@ -26,19 +26,33 @@ exports.createCourse = function (req, res) {
 
     _coursebase.topics.forEach(function (_topic, idx, array) {
         Topic.findOne({ topicNodeId: _topic.topicNodeId }, function (err, _seltopic) {
-            if (_seltopic)
+            if (_seltopic) {
                 _course.topics.push(_seltopic._id);
 
-            if (idx === array.length - 1) {
-                Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
-                    if (err) {
-                        return res.status(400).send({
-                            message: err
-                        });
-                    } else {
-                        res.json(course);
-                    }
-                });
+                if (idx === array.length - 1) {
+                    Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
+                        if (err) {
+                            return res.status(400).send({
+                                message: err
+                            });
+                        } else {
+                            res.json(course);
+                        }
+                    });
+                }
+            }
+            else if (err) {
+                if (idx === array.length - 1) {
+                    Course.findOneAndUpdate({ courseNodeId: _course.courseNodeId }, _course, { upsert: true, new: true }, function (err, course) {
+                        if (err) {
+                            return res.status(400).send({
+                                message: err
+                            });
+                        } else {
+                            res.json(course);
+                        }
+                    });
+                }
             }
         });
     });
@@ -71,7 +85,7 @@ exports.deleteCourse = function (req, res) {
 
 exports.getAllCourses = function (req, res) {
 
-    
+
 
     Course.find().populate('topics').exec(function (err, courses) {
         if (err) {

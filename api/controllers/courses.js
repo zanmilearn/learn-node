@@ -42,7 +42,7 @@ exports.createCourse = function (req, res) {
                             }
                         });
 
-                    }, 5000)
+                    }, 3000)
                 }
 
 

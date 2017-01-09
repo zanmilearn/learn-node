@@ -27,10 +27,11 @@ exports.createTopic = function (req, res) {
     _topicbase.contents.forEach(function (_content, idx, array) {
         Content.findOne({ contentNodeId: _content.contentNodeId }, function (err, _selcontent) {
 
-            if (_selcontent) {
+            if (_selcontent) 
                 _topic.contents.push(_selcontent._id);
 
                 if (idx === array.length - 1) {
+                    setTimeout(function () {
                     Topic.findOneAndUpdate({ topicNodeId: _topic.topicNodeId }, _topic, { upsert: true, new: true }, function (err, savedtopic) {
                         if (err) {
                             return res.status(400).send({
@@ -54,37 +55,11 @@ exports.createTopic = function (req, res) {
 
                         }
                     });
+                    },3000);
                 }
-            }
-            else if(err)
-            {
-                 if (idx === array.length - 1) {
-                    Topic.findOneAndUpdate({ topicNodeId: _topic.topicNodeId }, _topic, { upsert: true, new: true }, function (err, savedtopic) {
-                        if (err) {
-                            return res.status(400).send({
-                                message: err
-                            });
-                        } else {
-                            if (_topicbase.topics) {
-                                _topicbase.topics.forEach(function (_temptopic) {
-                                    Topic.findOneAndUpdate({ topicNodeId: _temptopic.topicNodeId }, { parentNodeId: savedtopic.topicNodeId }, function (err) {
-                                        if (err) {
-                                            return res.status(400).send({
-                                                message: "error"
-                                            });
-                                        }
-                                    });
-                                });
-                            }
-                            return res.status(200).send({
-                                message: "success"
-                            });
-
-                        }
-                    });
-                }
-
-            }
+                
+            
+            
         });
 
     });
